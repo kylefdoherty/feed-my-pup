@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import DogInfo from './components/dog_info';
+import UserInfo from './components/user_info';
 
+// need to clean this up later
 const outerWrapperStyles = {
   display: '-webkit-box',
   display: '-moz-box',
   display: '-webkit-flex',
-  display: 'flex',             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  display: 'flex',
   WebkitBoxFlexDirection: 'row',
   MozBoxFlexDirection: 'row',
   WebkitFlexDirection: 'row',
@@ -28,7 +30,8 @@ export default class App extends Component {
     return (
       <div style={outerWrapperStyles} className='outer-wrapper'>
         <div style={innerWrapperStyles} className='inner-wrapper'>
-          <DogInfo />
+
+          <UserInfo />
         </div>
       </div>
     );

@@ -1,7 +1,8 @@
-export const CREATE_POST = 'CREATE_POST';
+export const SUBMIT_DOG_INFO = 'SUBMIT_DOG_INFO';
+export const SUBMIT_USER_INFO = 'SUBMIT_USER_INFO';
 
 export const submitDogInfo = (info) => {
-  console.log('dog info: ', info)
+  console.log('dog info: ', info);
   // make POST request here & use middleware to wait
   // for success or failure to be returned
 
@@ -9,7 +10,18 @@ export const submitDogInfo = (info) => {
   let request = info
 
   return {
-    type: CREATE_POST,
+    type: SUBMIT_DOG_INFO,
+    payload: request
+  }
+}
+
+export const submitUserInfo = (info) => {
+  console.log('user info', info);
+
+  let request = info
+
+  return {
+    type: SUBMIT_USER_INFO,
     payload: request
   }
 }
