@@ -10,7 +10,6 @@ const errorStyles = {
 }
 
 class DogInfo extends Component {
-
   errorMessage(field) {
     return(
       <div style={errorStyles} className='error'>
@@ -41,7 +40,12 @@ class DogInfo extends Component {
         </div>
         <div>
           <label>Breed: </label>
-          <input type='text' placeholder='Pitbull' {...breed}/>
+          <select value={breed.value || ''} {...breed}>
+            <option value=''>...select breed</option>
+            <option value='pitbull'>Pitbull</option>
+            <option value='lab'>Lab</option>
+            <option value='boxer'>Boxer</option>
+          </select>
           { this.errorMessage(breed) }
         </div>
         <div>
@@ -51,7 +55,12 @@ class DogInfo extends Component {
         </div>
         <div>
           <label>Activity Level: </label>
-          <input type='text' placeholder='Active' {...activityLevel}/>
+          <select value={activityLevel.value || ''} {...activityLevel}>
+            <option value=''>...select activity level</option>
+            <option value='couch potato'>Couch Potato</option>
+            <option value='active'>Active</option>
+            <option value='triathlete'>Triathlete</option>
+          </select>
           { this.errorMessage(activityLevel) }
         </div>
         <div>
@@ -61,7 +70,13 @@ class DogInfo extends Component {
         </div>
         <div>
           <label>Body Composition: </label>
-          <input type='text' placeholder='Perfecto' {...bodyComposition}/>
+          <select value={bodyComposition.value || ''} {...bodyComposition}>
+            <option value=''>...select body composition</option>
+            <option value='little skinny'>Little Skinny</option>
+            <option value='just right'>Just Right</option>
+            <option value='little chunky'>Little Chunky</option>
+            <option value='overweight'>Overweight</option>
+          </select>
           { this.errorMessage(bodyComposition) }
         </div>
         <div>
@@ -80,7 +95,6 @@ const validate = (values) => {
   _.each(FIELDS, (field) => {
     if(!values[field]) {
       errors[field] = 'Required field'
-      console.log(errors)
     }
   })
 
