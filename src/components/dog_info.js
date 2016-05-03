@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { submitDogInfo } from '../actions';
 import _ from 'lodash';
@@ -18,6 +18,11 @@ class DogInfo extends Component {
     )
   }
 
+  onSubmit(props) {
+    this.props.submitDogInfo(props)
+    this.context.router.push('/create-account')
+  }
+
   render() {
     const {
       fields: { dogName, age, breed, allergies, activityLevel, weight, bodyComposition },
@@ -27,7 +32,7 @@ class DogInfo extends Component {
     } = this.props
 
     return(
-      <form onSubmit={ handleSubmit(this.props.submitDogInfo) }>
+      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
         <div>
           <label>Dog Name: </label>
           <input type='text' placeholder='Molly' {...dogName}/>
@@ -101,8 +106,11 @@ const validate = (values) => {
   return errors
 }
 
+DogInfo.contextTypes = {
+  router: PropTypes.object
+};
+
 export default reduxForm({
   form: 'dogInfo',
-  fields: FIELDS,
-  validate
+  fields: FIELDS
 }, null, { submitDogInfo })(DogInfo)

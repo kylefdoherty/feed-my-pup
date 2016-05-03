@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import DogInfo from './components/dog_info';
-import UserInfo from './components/user_info';
 
 // need to clean this up later
 const outerWrapperStyles = {
@@ -30,8 +28,7 @@ export default class App extends Component {
     return (
       <div style={outerWrapperStyles} className='outer-wrapper'>
         <div style={innerWrapperStyles} className='inner-wrapper'>
-
-          <UserInfo />
+          {this.props.children}
         </div>
       </div>
     );
