@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { submitUserInfo } from '../actions';
+import axios from 'axios';
 import _ from 'lodash';
 
 const FIELDS = ['name', 'email', 'zipCode', 'password', 'dogId'];
@@ -18,6 +19,19 @@ class UserInfo extends Component {
     )
   }
 
+  onSubmit(props) {
+    const url = 'http://localhost:8000/users'
+    const request = axios.post(url, props)
+
+    request.then(({data}) => {
+      this.props.submitUserInfo(data)
+      // this.context.router.push('/user-dash')
+    })
+    .catch(function (response) {
+      console.log('an error occured', data);
+    });
+  }
+
   render() {
     const {
       fields: { name, email, zipCode, password, dogId },
@@ -27,7 +41,7 @@ class UserInfo extends Component {
     } = this.props
 
     return(
-      <form onSubmit={ handleSubmit(this.props.submitUserInfo) } >
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
         <div>
           <label>Name: </label>
           <input type='text' placeholder='John' {...name}/>
