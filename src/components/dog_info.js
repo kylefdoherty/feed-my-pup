@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { submitDogInfo } from '../actions';
+import { submitDogInfo, fetchBreeds } from '../actions';
+import axios from 'axios';
 import _ from 'lodash';
 
 const FIELDS = ['dogName', 'age', 'breed', 'allergies', 'activityLevel', 'weight', 'bodyComposition']
@@ -10,12 +11,46 @@ const errorStyles = {
 }
 
 class DogInfo extends Component {
+  componentDidMount() {
+    this.props.fetchBreeds()
+  }
+
   errorMessage(field) {
     return(
       <div style={errorStyles} className='error'>
         { field.touched ? field.error : ''}
       </div>
     )
+  }
+
+  breedSelect(field) {
+    return(
+      <div>
+        <label>Breed: </label>
+        <select value={field.value || ''} {...field}>
+          <option value=''>...select breed</option>
+          {this.props.breeds.map((breed) => {
+            return(
+              <option key={breed} value={breed}>{breed}</option>
+            )
+          })}
+        </select>
+        { this.errorMessage(field) }
+      </div>
+    )
+  }
+
+  onSubmit(props) {
+    const url = 'http://localhost:8000/dogs'
+    const request = axios.post(url, props)
+
+    request.then(({data}) => {
+      this.props.submitDogInfo(data)
+      this.context.router.push('/create-account')
+    })
+    .catch(function (response) {
+      console.log('an error occured', data);
+    });
   }
 
   render() {
@@ -27,7 +62,7 @@ class DogInfo extends Component {
     } = this.props
 
     return(
-      <form onSubmit={ handleSubmit(this.props.submitDogInfo) }>
+      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
         <div>
           <label>Dog Name: </label>
           <input type='text' placeholder='Molly' {...dogName}/>
@@ -38,16 +73,7 @@ class DogInfo extends Component {
           <input type='number' placeholder='5' {...age}/>
           { this.errorMessage(age) }
         </div>
-        <div>
-          <label>Breed: </label>
-          <select value={breed.value || ''} {...breed}>
-            <option value=''>...select breed</option>
-            <option value='pitbull'>Pitbull</option>
-            <option value='lab'>Lab</option>
-            <option value='boxer'>Boxer</option>
-          </select>
-          { this.errorMessage(breed) }
-        </div>
+        { this.breedSelect(breed) }
         <div>
           <label>Allergies: </label>
           <input type='text' placeholder='Soy' {...allergies}/>
@@ -101,8 +127,18 @@ const validate = (values) => {
   return errors
 }
 
+DogInfo.contextTypes = {
+  router: PropTypes.object
+};
+
+const mapStateToProps = (state) => {
+  return {
+    breeds: state.dogInfoForm.breeds,
+    initialValues: state.dogInfoForm.dogInfo
+  }
+}
+
 export default reduxForm({
   form: 'dogInfo',
-  fields: FIELDS,
-  validate
-}, null, { submitDogInfo })(DogInfo)
+  fields: FIELDS
+}, mapStateToProps, { submitDogInfo, fetchBreeds })(DogInfo)

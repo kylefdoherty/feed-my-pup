@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { submitUserInfo } from '../actions';
+import axios from 'axios';
 import _ from 'lodash';
 
-const FIELDS = ['name', 'email', 'zipCode', 'password'];
+const FIELDS = ['name', 'email', 'zipCode', 'password', 'dogId'];
 
 const errorStyles = {
   color: 'red'
@@ -18,16 +19,29 @@ class UserInfo extends Component {
     )
   }
 
+  onSubmit(props) {
+    const url = 'http://localhost:8000/users'
+    const request = axios.post(url, props)
+
+    request.then(({data}) => {
+      this.props.submitUserInfo(data)
+      // this.context.router.push('/user-dash')
+    })
+    .catch(function (response) {
+      console.log('an error occured', data);
+    });
+  }
+
   render() {
     const {
-      fields: { name, email, zipCode, password },
+      fields: { name, email, zipCode, password, dogId },
       handleSubmit,
       resetForm,
       submitting
     } = this.props
 
     return(
-      <form onSubmit={ handleSubmit(this.props.submitUserInfo) } >
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
         <div>
           <label>Name: </label>
           <input type='text' placeholder='John' {...name}/>
@@ -47,6 +61,9 @@ class UserInfo extends Component {
           <label>Password: </label>
           <input type='password' {...password}/>
           { this.errorMessage(password) }
+        </div>
+        <div>
+          <input type='hidden' {...dogId}/>
         </div>
         <div>
           <button type="submit" disabled={submitting}>
@@ -70,8 +87,18 @@ const validate = (values) => {
   return errors
 }
 
+UserInfo.contextTypes = {
+  store: PropTypes.object
+};
+
+const mapStateToProps = (state) => {
+  return {
+    initialValues: { dogId: state.dogInfoForm.dogInfo.id }
+  }
+}
+
 export default reduxForm({
   form: 'userInfo',
   fields: FIELDS,
   validate
-}, null, { submitUserInfo })(UserInfo)
+}, mapStateToProps, { submitUserInfo})(UserInfo)

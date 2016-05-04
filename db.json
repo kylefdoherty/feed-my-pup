@@ -1,0 +1,69 @@
+{
+  "dogs": [
+    {
+      "id": 1,
+      "dogName": "Molly",
+      "age": 5,
+      "breed": "Pitbull",
+      "allergies": "soy",
+      "activityLevel": "active",
+      "weight": 60,
+      "bodyComposition": "just right"
+    },
+    {
+      "dogName": "Doug",
+      "age": 2,
+      "breed": "Lab",
+      "allergies": "corn",
+      "activityLevel": "couch potato",
+      "weight": 50,
+      "bodyComposition": "chunky",
+      "id": 2
+    },
+    {
+      "dogName": "cash ",
+      "age": 4,
+      "breed": "Pitbull",
+      "allergies": "soy",
+      "activityLevel": "active",
+      "weight": 55,
+      "bodyComposition": "little chunky",
+      "id": 3
+    },
+    {
+      "dogName": "dog",
+      "age": 5,
+      "breed": "Pitbull",
+      "allergies": "soy ",
+      "activityLevel": "active",
+      "weight": 55,
+      "bodyComposition": "just right",
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "name": "Kyle",
+      "email": "kyle@gmail.com",
+      "zipCode": 11217,
+      "password": "password",
+      "dogId": 1
+    },
+    {
+      "name": "Kyle Doherty",
+      "email": "kyled@gmail.com",
+      "zipCode": 11217,
+      "password": "password",
+      "dogId": 5,
+      "id": "99750220-e74b-41a3-9b67-cb13a0da7cf9"
+    }
+  ],
+  "breeds": [
+    "Lab",
+    "Pitbull",
+    "Boxer",
+    "French Bulldog",
+    "Shiba Inu",
+    "Rhodesian Ridgeback"
+  ]
+}
