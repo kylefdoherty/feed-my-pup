@@ -1,0 +1,34 @@
+{
+  "dogs": [
+    {
+      "id": 1,
+      "dogName": "Molly",
+      "age": 5,
+      "breed": "Pitbull",
+      "allergies": "soy",
+      "activityLevel": "active",
+      "weight": 60,
+      "bodyComposition": "just right"
+    },
+    {
+      "dogName": "Doug",
+      "age": 2,
+      "breed": "Lab",
+      "allergies": "corn",
+      "activityLevel": "couch potato",
+      "weight": 50,
+      "bodyComposition": "chunky",
+      "id": 2
+    },
+    {
+      "dogName": "Cash ",
+      "age": 4,
+      "breed": "pitbull",
+      "allergies": "rabbit",
+      "activityLevel": "active",
+      "weight": 55,
+      "bodyComposition": "little chunky",
+      "id": 3
+    }
+  ]
+}
