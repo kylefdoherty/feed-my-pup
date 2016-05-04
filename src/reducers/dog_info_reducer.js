@@ -1,11 +1,24 @@
 import { SUBMIT_DOG_INFO, FETCH_BREEDS } from '../actions';
 
-const DogInfo = (state = { breeds: []}, action = {}) => {
+const defaultState = () => {
+  return(
+    {
+      breeds: [],
+      dogInfo: {}
+    }
+  )
+}
+
+const DogInfo = (state = defaultState(), action = {}) => {
   switch (action.type) {
     case SUBMIT_DOG_INFO:
-      return action.payload
+      state.dogInfo = action.payload
+
+      return state
     case FETCH_BREEDS:
-      return { breeds: action.payload }
+      state.breeds = action.payload
+
+      return state
     default:
       return state
   }

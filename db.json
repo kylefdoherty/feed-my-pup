@@ -79,6 +79,26 @@
       "weight": 50,
       "bodyComposition": "just right",
       "id": 8
+    },
+    {
+      "dogName": "Ashley",
+      "age": 8,
+      "breed": "French Bulldog",
+      "allergies": "rice",
+      "activityLevel": "active",
+      "weight": 25,
+      "bodyComposition": "just right",
+      "id": 9
+    },
+    {
+      "dogName": "Baxter",
+      "age": 1,
+      "breed": "Rhodesian Ridgeback",
+      "allergies": "soy",
+      "activityLevel": "triathlete",
+      "weight": 80,
+      "bodyComposition": "just right",
+      "id": 10
     }
   ],
   "breeds": [
@@ -86,6 +106,7 @@
     "Pitbull",
     "Boxer",
     "French Bulldog",
-    "Shiba Inu"
+    "Shiba Inu",
+    "Rhodesian Ridgeback"
   ]
 }

@@ -45,7 +45,6 @@ class DogInfo extends Component {
   }
 
   render() {
-    console.log('breeds: ', this.props.breeds)
     const {
       fields: { dogName, age, breed, allergies, activityLevel, weight, bodyComposition },
       handleSubmit,
@@ -124,7 +123,11 @@ DogInfo.contextTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return { breeds: state.dogInfo.breeds }
+  return {
+    breeds: state.dogInfoForm.breeds,
+    dogInfo: state.dogInfoForm.dogInfo,
+    initialValues: state.dogInfoForm.dogInfo
+  }
 }
 
 export default reduxForm({
