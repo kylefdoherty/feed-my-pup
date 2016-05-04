@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { submitUserInfo } from '../actions';
 import _ from 'lodash';
 
-const FIELDS = ['name', 'email', 'zipCode', 'password'];
+const FIELDS = ['name', 'email', 'zipCode', 'password', 'dogId'];
 
 const errorStyles = {
   color: 'red'
@@ -20,7 +20,7 @@ class UserInfo extends Component {
 
   render() {
     const {
-      fields: { name, email, zipCode, password },
+      fields: { name, email, zipCode, password, dogId },
       handleSubmit,
       resetForm,
       submitting
@@ -49,6 +49,9 @@ class UserInfo extends Component {
           { this.errorMessage(password) }
         </div>
         <div>
+          <input type='hidden' {...dogId}/>
+        </div>
+        <div>
           <button type="submit" disabled={submitting}>
             Create Account
           </button>
@@ -70,8 +73,18 @@ const validate = (values) => {
   return errors
 }
 
+UserInfo.contextTypes = {
+  store: PropTypes.object
+};
+
+const mapStateToProps = (state) => {
+  return {
+    initialValues: { dogId: state.dogInfoForm.dogInfo.id }
+  }
+}
+
 export default reduxForm({
   form: 'userInfo',
   fields: FIELDS,
   validate
-}, null, { submitUserInfo })(UserInfo)
+}, mapStateToProps, { submitUserInfo})(UserInfo)

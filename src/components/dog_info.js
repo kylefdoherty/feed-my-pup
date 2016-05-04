@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { submitDogInfo, fetchBreeds } from '../actions';
+import axios from 'axios';
 import _ from 'lodash';
 
 const FIELDS = ['dogName', 'age', 'breed', 'allergies', 'activityLevel', 'weight', 'bodyComposition']
@@ -11,7 +12,7 @@ const errorStyles = {
 
 class DogInfo extends Component {
   componentDidMount() {
-    const breeds = this.props.fetchBreeds()
+    this.props.fetchBreeds()
   }
 
   errorMessage(field) {
@@ -40,8 +41,16 @@ class DogInfo extends Component {
   }
 
   onSubmit(props) {
-    this.props.submitDogInfo(props)
-    this.context.router.push('/create-account')
+    const url = 'http://localhost:8000/dogs'
+    const request = axios.post(url, props)
+
+    request.then(({data}) => {
+      this.props.submitDogInfo(data)
+      this.context.router.push('/create-account')
+    })
+    .catch(function (response) {
+      console.log('an error occured', data);
+    });
   }
 
   render() {
@@ -125,7 +134,6 @@ DogInfo.contextTypes = {
 const mapStateToProps = (state) => {
   return {
     breeds: state.dogInfoForm.breeds,
-    dogInfo: state.dogInfoForm.dogInfo,
     initialValues: state.dogInfoForm.dogInfo
   }
 }
