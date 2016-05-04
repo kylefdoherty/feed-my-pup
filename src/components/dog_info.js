@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
-import { submitDogInfo } from '../actions';
+import { submitDogInfo, fetchBreeds } from '../actions';
 import _ from 'lodash';
 
 const FIELDS = ['dogName', 'age', 'breed', 'allergies', 'activityLevel', 'weight', 'bodyComposition']
@@ -10,10 +10,31 @@ const errorStyles = {
 }
 
 class DogInfo extends Component {
+  componentDidMount() {
+    const breeds = this.props.fetchBreeds()
+  }
+
   errorMessage(field) {
     return(
       <div style={errorStyles} className='error'>
         { field.touched ? field.error : ''}
+      </div>
+    )
+  }
+
+  breedSelect(field) {
+    return(
+      <div>
+        <label>Breed: </label>
+        <select value={field.value || ''} {...field}>
+          <option value=''>...select breed</option>
+          {this.props.breeds.map((breed) => {
+            return(
+              <option key={breed} value={breed}>{breed}</option>
+            )
+          })}
+        </select>
+        { this.errorMessage(field) }
       </div>
     )
   }
@@ -24,6 +45,7 @@ class DogInfo extends Component {
   }
 
   render() {
+    console.log('breeds: ', this.props.breeds)
     const {
       fields: { dogName, age, breed, allergies, activityLevel, weight, bodyComposition },
       handleSubmit,
@@ -43,16 +65,7 @@ class DogInfo extends Component {
           <input type='number' placeholder='5' {...age}/>
           { this.errorMessage(age) }
         </div>
-        <div>
-          <label>Breed: </label>
-          <select value={breed.value || ''} {...breed}>
-            <option value=''>...select breed</option>
-            <option value='pitbull'>Pitbull</option>
-            <option value='lab'>Lab</option>
-            <option value='boxer'>Boxer</option>
-          </select>
-          { this.errorMessage(breed) }
-        </div>
+        { this.breedSelect(breed) }
         <div>
           <label>Allergies: </label>
           <input type='text' placeholder='Soy' {...allergies}/>
@@ -110,7 +123,11 @@ DogInfo.contextTypes = {
   router: PropTypes.object
 };
 
+const mapStateToProps = (state) => {
+  return { breeds: state.dogInfo.breeds }
+}
+
 export default reduxForm({
   form: 'dogInfo',
   fields: FIELDS
-}, null, { submitDogInfo })(DogInfo)
+}, mapStateToProps, { submitDogInfo, fetchBreeds })(DogInfo)

@@ -29,6 +29,63 @@
       "weight": 55,
       "bodyComposition": "little chunky",
       "id": 3
+    },
+    {
+      "dogName": "Jenny",
+      "age": 10,
+      "breed": "lab",
+      "allergies": "soy",
+      "activityLevel": "couch potato",
+      "weight": 50,
+      "bodyComposition": "little chunky",
+      "id": 4
+    },
+    {
+      "dogName": "Rosco",
+      "age": 3,
+      "breed": "boxer",
+      "allergies": "rice",
+      "activityLevel": "active",
+      "weight": 68,
+      "bodyComposition": "just right",
+      "id": 5
+    },
+    {
+      "dogName": "Blue ",
+      "age": 8,
+      "breed": "lab",
+      "allergies": "beans",
+      "activityLevel": "triathlete",
+      "weight": 40,
+      "bodyComposition": "just right",
+      "id": 6
+    },
+    {
+      "dogName": "Vivian ",
+      "age": 6,
+      "breed": "lab",
+      "allergies": "chicken",
+      "activityLevel": "active",
+      "weight": 35,
+      "bodyComposition": "little skinny",
+      "id": 7
+    },
+    {
+      "dogName": "Fido",
+      "age": 5,
+      "breed": "pitbull",
+      "allergies": "beans",
+      "activityLevel": "active",
+      "weight": 50,
+      "bodyComposition": "just right",
+      "id": 8
     }
+  ],
+  "breeds": [
+    "Lab",
+    "Pitbull",
+    "Boxer",
+    "French Bulldog",
+    "Shiba Inu"
   ]
 }

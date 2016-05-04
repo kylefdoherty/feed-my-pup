@@ -1,11 +1,11 @@
-import { SUBMIT_DOG_INFO } from '../actions';
+import { SUBMIT_DOG_INFO, FETCH_BREEDS } from '../actions';
 
-const DogInfo = (state = [], action = {}) => {
+const DogInfo = (state = { breeds: []}, action = {}) => {
   switch (action.type) {
     case SUBMIT_DOG_INFO:
-      console.log('made it to reducer');
-      return 'success'
-
+      return action.payload
+    case FETCH_BREEDS:
+      return { breeds: action.payload }
     default:
       return state
   }
