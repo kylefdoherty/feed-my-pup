@@ -16,6 +16,7 @@ const DogInfo = (state = defaultState(), action = {}) => {
 
       return state
     case FETCH_BREEDS:
+      console.log('breeds object', action.payload)
       state.breeds = action.payload
 
       return state

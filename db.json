@@ -2,7 +2,7 @@
   "dogs": [
     {
       "id": 1,
-      "dogName": "Molly",
+      "name": "Molly",
       "age": 5,
       "breed": "Pitbull",
       "allergies": "soy",
@@ -11,7 +11,7 @@
       "bodyComposition": "just right"
     },
     {
-      "dogName": "Doug",
+      "name": "Doug",
       "age": 2,
       "breed": "Lab",
       "allergies": "corn",
@@ -21,7 +21,7 @@
       "id": 2
     },
     {
-      "dogName": "cash ",
+      "name": "cash ",
       "age": 4,
       "breed": "Pitbull",
       "allergies": "soy",
@@ -31,7 +31,7 @@
       "id": 3
     },
     {
-      "dogName": "dog",
+      "name": "dog",
       "age": 5,
       "breed": "Pitbull",
       "allergies": "soy ",

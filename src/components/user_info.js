@@ -4,7 +4,7 @@ import { submitUserInfo } from '../actions';
 import axios from 'axios';
 import _ from 'lodash';
 
-const FIELDS = ['name', 'email', 'zipCode', 'password', 'dogId'];
+const FIELDS = ['email', 'password', 'dogId'];
 
 const errorStyles = {
   color: 'red'
@@ -20,12 +20,27 @@ class UserInfo extends Component {
   }
 
   onSubmit(props) {
-    const url = 'http://localhost:8000/users'
-    const request = axios.post(url, props)
+    const url = 'http://localhost:8000/signup/api/users'
+    const payload = {
+      user: {},
+      dog: {}
+    }
+
+    _.each(Object.keys(props), (attr) => {
+      if(attr === 'dogId') {
+        payload.dog[attr] = props[attr]
+      } else {
+        payload.user[attr] = props[attr]
+      }
+    })
+
+
+    const request = axios.post(url, payload)
 
     request.then(({data}) => {
-      this.props.submitUserInfo(data)
-      // this.context.router.push('/user-dash')
+      const response = this.props.submitUserInfo(data)
+      const id = response.payload.id
+      this.context.router.push(`/users/${id}/dashboard`)
     })
     .catch(function (response) {
       console.log('an error occured', data);
@@ -34,7 +49,7 @@ class UserInfo extends Component {
 
   render() {
     const {
-      fields: { name, email, zipCode, password, dogId },
+      fields: {email, password, dogId },
       handleSubmit,
       resetForm,
       submitting
@@ -43,20 +58,10 @@ class UserInfo extends Component {
     return(
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
         <div>
-          <label>Name: </label>
-          <input type='text' placeholder='John' {...name}/>
-          { this.errorMessage(name) }
-        </div>
-        <div>
           <label>Email: </label>
           <input type='text' placeholder='john@gmail.com' {...email}/>
         </div>
         { this.errorMessage(email) }
-        <div>
-          <label>Zip Code: </label>
-          <input type='text' placeholder='11217' {...zipCode}/>
-          { this.errorMessage(zipCode) }
-        </div>
         <div>
           <label>Password: </label>
           <input type='password' {...password}/>
@@ -88,7 +93,7 @@ const validate = (values) => {
 }
 
 UserInfo.contextTypes = {
-  store: PropTypes.object
+  router: PropTypes.object
 };
 
 const mapStateToProps = (state) => {

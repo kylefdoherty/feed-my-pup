@@ -6,7 +6,7 @@ export const SUBMIT_DOG_INFO = 'SUBMIT_DOG_INFO';
 export const SUBMIT_USER_INFO = 'SUBMIT_USER_INFO';
 
 export const fetchBreeds = () => {
-  const url = 'http://localhost:8000/breeds'
+  const url = 'http://localhost:8000/signup/api/breeds'
   const request = axios.get(url)
 
   return (dispatch) => {

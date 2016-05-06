@@ -4,7 +4,7 @@ import { submitDogInfo, fetchBreeds } from '../actions';
 import axios from 'axios';
 import _ from 'lodash';
 
-const FIELDS = ['dogName', 'age', 'breed', 'allergies', 'activityLevel', 'weight', 'bodyComposition']
+const FIELDS = ['name', 'gender', 'age', 'breed', 'activityLevel', 'weight', 'bodyComposition']
 
 const errorStyles = {
   color: 'red'
@@ -31,7 +31,7 @@ class DogInfo extends Component {
           <option value=''>...select breed</option>
           {this.props.breeds.map((breed) => {
             return(
-              <option key={breed} value={breed}>{breed}</option>
+              <option key={breed.id} value={breed.name}>{breed.name}</option>
             )
           })}
         </select>
@@ -41,10 +41,11 @@ class DogInfo extends Component {
   }
 
   onSubmit(props) {
-    const url = 'http://localhost:8000/dogs'
+    const url = 'http://localhost:8000/signup/api/dogs'
     const request = axios.post(url, props)
 
     request.then(({data}) => {
+      console.log('its alive: ', data)
       this.props.submitDogInfo(data)
       this.context.router.push('/create-account')
     })
@@ -55,7 +56,7 @@ class DogInfo extends Component {
 
   render() {
     const {
-      fields: { dogName, age, breed, allergies, activityLevel, weight, bodyComposition },
+      fields: { name, gender, age, breed, activityLevel, weight, bodyComposition },
       handleSubmit,
       resetForm,
       submitting
@@ -65,20 +66,24 @@ class DogInfo extends Component {
       <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
         <div>
           <label>Dog Name: </label>
-          <input type='text' placeholder='Molly' {...dogName}/>
-          { this.errorMessage(dogName) }
+          <input type='text' placeholder='Molly' {...name}/>
+          { this.errorMessage(name) }
         </div>
         <div>
           <label>Age: </label>
           <input type='number' placeholder='5' {...age}/>
           { this.errorMessage(age) }
         </div>
-        { this.breedSelect(breed) }
         <div>
-          <label>Allergies: </label>
-          <input type='text' placeholder='Soy' {...allergies}/>
-          { this.errorMessage(allergies) }
+          <label>Gender: </label>
+          <select value={gender.value || ''} {...gender}>
+            <option value=''>...select gender</option>
+            <option value='female'>Female</option>
+            <option value='male'>Male</option>
+          </select>
+          { this.errorMessage(gender) }
         </div>
+        { this.breedSelect(breed) }
         <div>
           <label>Activity Level: </label>
           <select value={activityLevel.value || ''} {...activityLevel}>
