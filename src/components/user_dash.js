@@ -4,7 +4,7 @@ export default class UserDash extends Component {
   render() {
     return(
       <div>
-        <h1>User Dash</h1>
+        <h1>User Dash!</h1>
       </div>
     )
   }
