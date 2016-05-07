@@ -17,14 +17,14 @@ class UserInfo extends Component {
   }
 
   onSubmit(props) {
-    console.log('boom in the submit', props)
+
     // const url = 'http://localhost:8000/signup/api/user-signup'
     const url = 'https://feed-my-pup-api.herokuapp.com/signup/api/user-signup';
     var payload = {}
     payload.user = props
     payload.dog = this.props.dogInfo
 
-    console.log('payload', payload)
+    console.log('url', url)
 
     const request = axios.post(url, payload)
 
