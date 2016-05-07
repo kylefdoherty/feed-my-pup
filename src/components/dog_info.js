@@ -14,18 +14,8 @@ class DogInfo extends Component {
   }
 
   onSubmit(props) {
-    // const url = 'http://localhost:8000/signup/api/dogs'
-    const url = 'https://feed-my-pup-api.herokuapp.com/signup/api/dogs.json';
-    const request = axios.post(url, props)
-
-    request.then(({data}) => {
-      console.log('its alive: ', data)
-      this.props.submitDogInfo(data)
-      this.context.router.push('/create-account')
-    })
-    .catch(function (response) {
-      console.log('an error occured', data);
-    });
+    this.props.submitDogInfo(props)
+    this.context.router.push('/create-account')
   }
 
   render() {

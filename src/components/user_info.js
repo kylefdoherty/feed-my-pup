@@ -5,37 +5,24 @@ import Input from './form-elements/input';
 import axios from 'axios';
 import _ from 'lodash';
 
-const FIELDS = ['email', 'password', 'dogId'];
-
-const errorStyles = {
-  color: 'red'
-}
+const FIELDS = ['email', 'password'];
 
 class UserInfo extends Component {
-  errorMessage(field) {
-    return(
-      <div style={errorStyles} className='error'>
-        { field.touched ? field.error : ''}
-      </div>
-    )
+  componentDidMount() {
+    // if no dog info e.g. user refreshes page
+    // send them back to root to fill in dog info again
+    if(Object.keys(this.props.dogInfo).length === 0) {
+      this.context.router.push('/')
+    }
   }
 
   onSubmit(props) {
-    // const url = 'http://localhost:8000/signup/api/users'
-    const url = 'https://feed-my-pup-api.herokuapp.com/signup/api/users.json';
-    const payload = {
-      user: {},
-      dog: {}
-    }
-
-    _.each(Object.keys(props), (attr) => {
-      if(attr === 'dogId') {
-        payload.dog[attr] = props[attr]
-      } else {
-        payload.user[attr] = props[attr]
-      }
-    })
-
+    console.log('boom in the submit', props)
+    // const url = 'http://localhost:8000/signup/api/user-signup'
+    const url = 'https://feed-my-pup-api.herokuapp.com/signup/api/user-signup';
+    var payload = {}
+    payload.user = props
+    payload.dog = this.props.dogInfo
 
     const request = axios.post(url, payload)
 
@@ -91,8 +78,9 @@ UserInfo.contextTypes = {
 };
 
 const mapStateToProps = (state) => {
+  console.log('doginfo', state.dogInfoForm.dogInfo)
   return {
-    initialValues: { dogId: state.dogInfoForm.dogInfo.id }
+    dogInfo: state.dogInfoForm.dogInfo
   }
 }
 
@@ -100,4 +88,4 @@ export default reduxForm({
   form: 'userInfo',
   fields: FIELDS,
   validate
-}, mapStateToProps, { submitUserInfo})(UserInfo)
+}, mapStateToProps, { submitUserInfo })(UserInfo)
