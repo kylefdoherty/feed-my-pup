@@ -12,6 +12,12 @@ var publicPath = path.resolve(__dirname, 'public');
 // We point to our static assets
 app.use(express.static(publicPath));
 
+app.all('/signup/api/*', function (req, res) {
+  proxy.web(req, res, {
+    target: 'https://feed-my-pup-api.herokuapp.com';
+  });
+});
+
 // We only want to run the workflow when not in production
 if (!isProduction) {
 
