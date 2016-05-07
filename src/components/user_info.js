@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { submitUserInfo } from '../actions';
+import Input from './form-elements/input';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -20,7 +21,8 @@ class UserInfo extends Component {
   }
 
   onSubmit(props) {
-    const url = 'http://localhost:8000/signup/api/users'
+    // const url = 'http://localhost:8000/signup/api/users'
+    const url = 'https://feed-my-pup-api.herokuapp.com/signup/api/users.json';
     const payload = {
       user: {},
       dog: {}
@@ -57,16 +59,8 @@ class UserInfo extends Component {
 
     return(
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
-        <div>
-          <label>Email: </label>
-          <input type='text' placeholder='john@gmail.com' {...email}/>
-        </div>
-        { this.errorMessage(email) }
-        <div>
-          <label>Password: </label>
-          <input type='password' {...password}/>
-          { this.errorMessage(password) }
-        </div>
+        <Input field={email} label='Email' placeholder='john@gmail.com' />
+        <Input field={password} label='Password' placeholder='' />
         <div>
           <input type='hidden' {...dogId}/>
         </div>
