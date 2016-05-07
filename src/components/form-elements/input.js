@@ -4,11 +4,11 @@ const errorStyles = {
   color: 'red'
 }
 
-const Input = ({label, placeholder, field}) => {
+const Input = ({label, placeholder, field, type='text'}) => {
   return(
     <div>
       <label>{label}: </label>
-      <input type='text' placeholder={placeholder} {...field}/>
+      <input type={type} placeholder={placeholder} {...field}/>
       <div style={errorStyles} className='error'>
         { field.touched ? field.error : ''}
       </div>

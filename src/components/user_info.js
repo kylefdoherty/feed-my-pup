@@ -36,21 +36,22 @@ class UserInfo extends Component {
     });
   }
 
+  onBoom(props) {
+    console.log('inside the boom method')
+  }
+
   render() {
     const {
-      fields: {email, password, dogId },
+      fields: {email, password},
       handleSubmit,
       resetForm,
       submitting
     } = this.props
 
     return(
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
+      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) } >
         <Input field={email} label='Email' placeholder='john@gmail.com' />
-        <Input field={password} label='Password' placeholder='' />
-        <div>
-          <input type='hidden' {...dogId}/>
-        </div>
+        <Input type='password' field={password} label='Password' placeholder='' />
         <div>
           <button type="submit" disabled={submitting}>
             Create Account
