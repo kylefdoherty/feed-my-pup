@@ -24,6 +24,8 @@ class UserInfo extends Component {
     payload.user = props
     payload.dog = this.props.dogInfo
 
+    console.log('payload', payload)
+
     const request = axios.post(url, payload)
 
     request.then(({data}) => {

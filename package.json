@@ -8,9 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint src",
-    "build": "webpack --config ./webpack.prod.config.js --progress --colors",
-    "postinstall": "webpack -p --config webpack.prod.config.js"
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
