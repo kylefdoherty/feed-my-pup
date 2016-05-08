@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { submitUserInfo } from '../actions';
 import Input from './form-elements/input';
+import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -54,10 +55,8 @@ class UserInfo extends Component {
       <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) } >
         <Input field={email} label='Email' placeholder='john@gmail.com' />
         <Input type='password' field={password} label='Password' placeholder='' />
-        <div>
-          <button type="submit" disabled={submitting}>
-            Create Account
-          </button>
+        <div style={{marginTop: '15px'}}>
+          <RaisedButton type='submit' disabled={submitting} label="Create Account" backgroundColor='#1de9b6'/>
         </div>
       </form>
     )
