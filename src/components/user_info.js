@@ -54,7 +54,7 @@ class UserInfo extends Component {
       <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) } >
         <Input field={email} label='Email' placeholder='john@gmail.com' />
         <Input type='password' field={password} label='Password' placeholder='' />
-        <div>
+        <div style={{marginTop: '15px'}}>
           <button type="submit" disabled={submitting}>
             Create Account
           </button>

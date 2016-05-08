@@ -3,12 +3,15 @@ import { reduxForm } from 'redux-form';
 import { submitDogInfo, fetchBreeds } from '../actions';
 import Input from './form-elements/input';
 import Select from './form-elements/select';
+import MuiSelect from './form-elements/mui_select';
+import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios';
 import _ from 'lodash';
 
 const FIELDS = ['name', 'gender', 'age', 'breed', 'activityLevel', 'weight', 'bodyComposition']
 
 class DogInfo extends Component {
+
   componentDidMount() {
     this.props.fetchBreeds()
   }
@@ -27,20 +30,20 @@ class DogInfo extends Component {
     } = this.props
 
     return(
-      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
-        <Input field={name} label='Dog Name' placeholder='Molly' />
-        <Input field={age} label='Age' placeholder='5' />
-        <Select field={gender} label='Gender' options={['Female', 'Male']} />
-        <Select field={breed} label='Breed' options={this.props.breeds.map((b) => { return b.name })} />
-        <Select field={activityLevel} label='Activity Level' options={['Couch Potato', 'Active', 'Triathlete']} />
-        <Input field={weight} label='Weight in lbs' placeholder='60' />
-        <Select field={bodyComposition} label='Body Composition' options={['Little Skinny', 'Just Right', 'Little Chunk', 'Overweight']} />
-        <div>
-          <button type="submit" disabled={submitting}>
-            Get Your Pup's Nutrition Plan
-          </button>
-        </div>
-      </form>
+      <div>
+        <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
+          <Input field={name} label='Dog Name' placeholder='Molly' />
+          <Input field={age} label='Age' placeholder='5' />
+          <MuiSelect field={gender} label='Gender' options={['Female', 'Male']} />
+          <MuiSelect field={breed} label='Breed' options={this.props.breeds.map((b) => { return b.name })} />
+          <MuiSelect field={activityLevel} label='Activity Level' options={['Couch Potato', 'Active', 'Triathlete']} />
+          <Input field={weight} label='Weight in lbs' placeholder='60' />
+          <MuiSelect field={bodyComposition} label='Body Composition' options={['Little Skinny', 'Just Right', 'Little Chunk', 'Overweight']} />
+          <div style={{marginTop: '25px'}}>
+            <RaisedButton disabled={submitting} label="Get Your Pup's Nutrition Plan" backgroundColor='#1de9b6'/>
+          </div>
+        </form>
+      </div>
     )
   }
 }

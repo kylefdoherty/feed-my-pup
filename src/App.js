@@ -1,36 +1,31 @@
 import React, { Component } from 'react';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-// need to clean this up later
 const outerWrapperStyles = {
-  display: '-webkit-box',
-  display: '-moz-box',
-  display: '-webkit-flex',
   display: 'flex',
-  WebkitBoxFlexDirection: 'row',
-  MozBoxFlexDirection: 'row',
-  WebkitFlexDirection: 'row',
-  flexDirection: 'row',
-  position: 'fixed',
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-  width: '100%',
-  height: '100%'
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: 'dee0e0',
+  height: '100vh'
 };
 
 const innerWrapperStyles = {
-  margin: 'auto'
+  background: '#adb1b3',
+  padding: '20px',
+  marginTop: '100px'
 }
 
 export default class App extends Component {
   render() {
     return (
-      <div style={outerWrapperStyles} className='outer-wrapper'>
-        <div style={innerWrapperStyles} className='inner-wrapper'>
-          {this.props.children}
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <div style={outerWrapperStyles} className='outer-wrapper'>
+          <div style={innerWrapperStyles} className='inner-wrapper'>
+            {this.props.children}
+          </div>
         </div>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
