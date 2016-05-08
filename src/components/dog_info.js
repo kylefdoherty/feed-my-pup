@@ -31,7 +31,7 @@ class DogInfo extends Component {
 
     return(
       <div>
-        <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
+        <form noValidate onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
           <Input field={name} label='Dog Name' placeholder='Molly' />
           <Input field={age} type='number' pattern='\d*' label='Age' placeholder='5' />
           <MuiSelect field={gender} label='Gender' options={['Female', 'Male']} />

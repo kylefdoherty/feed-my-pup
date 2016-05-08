@@ -52,7 +52,7 @@ class UserInfo extends Component {
     } = this.props
 
     return(
-      <form onSubmit={ handleSubmit(this.onSubmit.bind(this)) } >
+      <form noValidate onSubmit={ handleSubmit(this.onSubmit.bind(this)) } >
         <Input field={email} label='Email' placeholder='john@gmail.com' />
         <Input type='password' field={password} label='Password' placeholder='' />
         <div style={{marginTop: '15px'}}>
