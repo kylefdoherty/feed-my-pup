@@ -5,7 +5,7 @@ const Input = ({label, placeholder, field, type='text', pattern=''}) => {
   const showError = field.touched ? field.error : '';
 
   return(
-    <div>
+    <div >
       <TextField hintText={placeholder}
             floatingLabelText={label}
             type={type}

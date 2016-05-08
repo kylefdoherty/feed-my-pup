@@ -29,16 +29,17 @@ export default class MuiSelect extends Component {
 
   handleTouchTap(event, index, value) {
     this.props.field.onChange(event)
-    this.props.field.value = value
+    this.setState({value})
   }
 
   render() {
     const { field } = this.props
     const showError = field.touched ? field.error : '';
+    console.log('field', this.props.field)
 
     return (
       <div>
-        <SelectField value={this.state.value}
+        <SelectField value={this.state.value || this.props.field.initialValue}
                      onChange={this.handleChange.bind(this)}
                      onTouchTap={this.handleTouchTap.bind(this)}
                      floatingLabelText={this.props.label}
