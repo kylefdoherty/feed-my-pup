@@ -4,6 +4,11 @@ import MenuItem from 'material-ui/MenuItem';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+const styles = {
+  display: 'flex',
+  justifyContent: 'center'
+}
+
 export default class MuiSelect extends Component {
   constructor(props) {
     super(props)
@@ -38,7 +43,7 @@ export default class MuiSelect extends Component {
     console.log('field', this.props.field)
 
     return (
-      <div>
+      <div style={styles}>
         <SelectField value={this.state.value || this.props.field.initialValue}
                      onChange={this.handleChange.bind(this)}
                      onTouchTap={this.handleTouchTap.bind(this)}
